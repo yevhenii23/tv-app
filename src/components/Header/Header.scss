@@ -1,0 +1,39 @@
+$mainColor: #3F3F3F;
+$buttonColor: #48958B;
+$textColor: #F9FAFF;
+
+.header {
+    background-color: $mainColor;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    height: 8vh;
+    .text {
+        color: $textColor;
+    }
+    .heading {
+        margin-left: 10px;
+    }
+}
+.label {
+    margin-right: 10px;
+
+}
+
+input[type=button] {
+    background-color: $buttonColor;
+    border:none;
+    color: $textColor;
+    text-decoration: none;
+    border-top-right-radius: 10px;
+    border-bottom-right-radius: 10px;
+    height: 35px;
+    width: 5vw;
+}
+
+input[type=search] {
+    border-bottom-left-radius: 10px;
+    border-top-left-radius: 10px;
+    height: 35px;
+    width: 20vw;
+}
