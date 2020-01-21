@@ -1,0 +1,15 @@
+$mainColor: #3F3F3F;
+$buttonColor: #48958B;
+$textColor: #F9FAFF;
+
+.column {
+    display: flex;
+    justify-content: center;
+    float: left;
+    width: 20%;
+    margin-top:4vh;
+}
+
+.title {
+    color:$buttonColor
+}

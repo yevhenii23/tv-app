@@ -5,7 +5,7 @@ import './Header.scss'
 export default class Header extends Component {
 
     render () {
-        return <div className="header">
+        return <div className="header"> 
            <h1 className="text heading">TV-APP</h1>
            <div className="label">
             <input type="search" placeholder="Type to Search"></input>
