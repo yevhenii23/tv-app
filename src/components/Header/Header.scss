@@ -17,7 +17,15 @@ $textColor: #F9FAFF;
 }
 .label {
     margin-right: 10px;
-    
+    .link {
+        color:$buttonColor;
+        margin-right: 10px;
+        text-decoration: none;
+    }
+    span {
+        margin-right: 15px;
+        color:red;
+    }
 }
 
 input[type=button] {

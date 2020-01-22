@@ -5,7 +5,7 @@ import './MovieList.scss';
 import { FaArrowAltCircleRight} from 'react-icons/fa'
 import { MdFavorite } from 'react-icons/md'
 import {
-    Container,Row,Col,Card, CardImg, CardText, CardBody,
+    Container,Row,Col,Card, CardImg,CardBody,
     CardTitle, CardSubtitle, Button
   } from 'reactstrap';
   
@@ -16,12 +16,18 @@ export default class MovieList extends Component {
         movies: [],
     };
 
-    componentDidMount() {
+    componentDidMount1() {
         axios.get('http://api.tvmaze.com/shows')     
         .then(res => {
             console.log(res.data)
             this.setState({movies:res.data})
         })
+    }
+
+    async componentDidMount() {
+        const { data: movies } = await axios.get('http://api.tvmaze.com/shows');
+        this.setState({ movies });
+        console.log(movies);
     }
 
  
@@ -30,14 +36,14 @@ export default class MovieList extends Component {
         const NoImage = 'http://www.noemiaalugueis.com.br/assets/images/no-image.png';
         return (
         <div className="main" >
-            {movies.map(movie => 
-           
-            <div key={movie.id} className='column'>
+            {movies
+            .map(({name,image,season,id}) => 
+            <div key={id} className='column'>
                 <Card style={{width:'250px', height:'470px'}}>
-                    <CardImg alt={movie.name} src={movie.image?movie.image.medium : NoImage}></CardImg>
+                    <CardImg alt={name} src={image?image.medium : NoImage}></CardImg>
                     <CardBody>
-                        <CardTitle className="title">{movie.name}</CardTitle>
-                        <CardSubtitle>{movie.season}</CardSubtitle>
+                        <CardTitle className="title">{name}</CardTitle>
+                        <CardSubtitle>{season}</CardSubtitle>
                         <Container>
                             <Row>
                                 <Col>
