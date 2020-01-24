@@ -8,7 +8,18 @@ import { getSearchMovies } from '../../store/actions';
  class Header extends Component {
 
     state = {
-        value: null,
+        value: '',
+    }
+    componentDidMount () {
+        let getInputValue = window.localStorage.getItem('setInputValue')
+        console.log('currentinputvalue',getInputValue)
+        this.setState({value:JSON.parse(getInputValue)})
+    }
+    componentDidUpdate () {
+        let setInputValue = this.state.value;
+        let setItem = window.localStorage.setItem('setInputValue',JSON.stringify(setInputValue));
+        console.log(setItem)
+
     }
 
     handleClick = () => {
@@ -29,7 +40,7 @@ import { getSearchMovies } from '../../store/actions';
             <Link to="/" className="link">Home</Link>
             <Link to="/mylist" className="link">My list:</Link>
             <span>{number}</span>  
-            <input type="search" placeholder="Type to Search"  onChange={this.handleChange}></input>
+            <input type="search" placeholder="Type to Search"  value={this.state.value} onChange={this.handleChange}></input>
             <input type="button" value="Search" onClick={this.handleClick}></input>
            </div>
         </div>

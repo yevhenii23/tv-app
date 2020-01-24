@@ -7,7 +7,6 @@ export const ADD_ABOUT_INFO = 'ADD_ABOUT_INFO';
 
 export const getAllMovies = () => (dispatch) => {
     let url = 'http://api.tvmaze.com/shows';
- 
     axios.get(url)
     .then(res => {
         dispatch({

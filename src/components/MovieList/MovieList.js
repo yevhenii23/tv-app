@@ -18,10 +18,12 @@ import { getAllMovies, addToFavorites, addAboutInfo } from '../../store/actions'
     componentDidMount() {
       this.props.getListOfMovies()
     }
-
+   
     addToFavorite = (element) => {
        let favorites = this.props.favorites;
-       if (!favorites.includes(element)) {
+       let favoritesId = favorites.map(fav=>fav.id)
+        console.log(favoritesId)
+       if (!favoritesId.includes(element.id)) {
         this.props.addMyList(element)
        }
         console.log(element)
