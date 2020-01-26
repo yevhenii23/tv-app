@@ -13,12 +13,11 @@ function App() {
       <div className="App">
         <Route path='/' component={Header}/>
         <Route path='/' component={MovieList} exact/>
-        <Route path ='/about' component={About} exact/>
+        <Route path ='/about/:showId' component={About} exact/>
         <Route path='/mylist' component={MyList} exact/>
       </div>
     </Router>
   );
 }
 
-
-export default connect()(App); 
+export default App; 

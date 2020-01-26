@@ -2,8 +2,6 @@ import axios from 'axios';
 
 export const FETCH_MOVIE_LIST = 'FETCH_MOVIE_LIST';
 export const ADD_TO_MY_LIST = 'ADD_TO_MY_LIST';
-export const ADD_ABOUT_INFO = 'ADD_ABOUT_INFO';
-
 
 export const getAllMovies = () => (dispatch) => {
     let url = 'http://api.tvmaze.com/shows';
@@ -30,17 +28,10 @@ export const getSearchMovies = (search) => (dispatch) => {
 }
 
 
-export const addToFavorites = (element) => {
-    console.log(element)
+export const addToFavorites = (id) => {
+    console.log(id)
     return {
         type: ADD_TO_MY_LIST,
-        payload: element
-    }
-}
-
-export const addAboutInfo = (about) => {
-    return {
-        type: ADD_ABOUT_INFO,
-        payload: about
+        id
     }
 }

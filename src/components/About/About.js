@@ -1,29 +1,30 @@
 import React from 'react';
+import PropTypes from 'prop-types';
+import { useParams } from 'react-router-dom';
 import { connect } from 'react-redux';
 
-
- class About extends React.Component {
-
-    DynamicHTML = () => {
-        let html = this.props.about.summary;
-        return <div dangerouslySetInnerHTML={ { __html: html}} />;
-      }
-      
-
-    render() {
-        console.log(this.props.about)
-        const { name } = this.props.about
-        return (<div>
-            <h1>About</h1>
-            <h2>{name?`Series: ${name}`:''}</h2>
-            <this.DynamicHTML></this.DynamicHTML>
-        </div>);
-    }
+const About = ({ getShow }) => {
+    const { showId } = useParams();
+    const { name,summary } = getShow(showId) || {};
+    return ( 
+    <div>
+        <h1>About</h1>
+        <h2>{`Series: ${name}`}</h2>
+        <div dangerouslySetInnerHTML={ { __html: summary }} />
+    </div>
+    )
 }
+
+
+About.propTypes = {
+    getShow: PropTypes.func.isRequired,
+    
+}
+
 const mapStateToProps = store => {
     return {
-        about:store.movieList.about,
+        getShow: (showId) => store.movieList.fetchedList.find(show=>show.id == showId)
     }
 }
 
-export default connect(mapStateToProps)(About)
+export default connect (mapStateToProps)(About);

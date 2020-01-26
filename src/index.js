@@ -14,8 +14,15 @@ export const rootReducer = combineReducers({
     movieList: movieListReducer,
 }) 
 
-const store = createStore(rootReducer, applyMiddleware(thunk));
+// https://stackoverflow.com/questions/35305661/where-to-write-to-localstorage-in-a-redux-app
 
+const persistedState = localStorage.getItem('reduxState') ? JSON.parse(localStorage.getItem('reduxState')) : {};
+
+const store = createStore(rootReducer, persistedState, applyMiddleware(thunk));
+
+store.subscribe(() => {
+    localStorage.setItem('reduxState', JSON.stringify(store.getState()))
+})
 
 ReactDOM.render(<Provider store={store}>
     <App />

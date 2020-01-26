@@ -10,7 +10,7 @@ import {
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import { Link } from "react-router-dom";
-import { getAllMovies, addToFavorites, addAboutInfo } from '../../store/actions';
+import { getAllMovies, addToFavorites } from '../../store/actions';
 
 
  class MovieList extends Component {
@@ -19,19 +19,16 @@ import { getAllMovies, addToFavorites, addAboutInfo } from '../../store/actions'
       this.props.getListOfMovies()
     }
    
-    addToFavorite = (element) => {
-       let favorites = this.props.favorites;
-       let favoritesId = favorites.map(fav=>fav.id)
-        console.log(favoritesId)
-       if (!favoritesId.includes(element.id)) {
-        this.props.addMyList(element)
-       }
-        console.log(element)
-    }
-    handleAbout = (element) => {
-        console.log('click')
-        this.props.aboutInformation(element);
-    }
+    // addToFavorite = (element) => {
+    //    let favorites = this.props.favorites;
+    //    let favoritesId = favorites.map(fav=>fav.id)
+    //     console.log(favoritesId)
+    //    if (!favoritesId.includes(element.id)) {
+    //     this.props.addMyList(element)
+    //    }
+    //     console.log(element)
+    // }
+
 
     render () {
         const NoImage = 'http://www.noemiaalugueis.com.br/assets/images/no-image.png';
@@ -48,14 +45,14 @@ import { getAllMovies, addToFavorites, addAboutInfo } from '../../store/actions'
                     <Container>
                         <Row>
                             <Col>
-                                <Link to='./about'>
-                                    <Button style={{width:'100px'}} onClick={()=>this.handleAbout(element)}>
+                                <Link to={`/about/${element.id}`}>
+                                    <Button style={{width:'100px'}}>
                                         More... <FaArrowAltCircleRight/>
                                     </Button>
                                 </Link>
                             </Col>
                             <Col>
-                                <Button onClick={() => this.addToFavorite(element)}>
+                                <Button onClick={() => this.props.addToMyList(element.id)}>
                                     <MdFavorite/>
                                 </Button>
                             </Col>
@@ -84,11 +81,9 @@ const mapStateToProps = store => {
 const mapDispatchToProps = dispatch => {
     return {
         getListOfMovies: () => dispatch(getAllMovies()),
-        addMyList: (element) => dispatch(addToFavorites(element)),
-        aboutInformation:(element) => dispatch(addAboutInfo(element))
-
+        addToMyList: (id) => dispatch(addToFavorites(id)),
     }
-    
+
 }
 
 export default connect(mapStateToProps,mapDispatchToProps)(MovieList);
