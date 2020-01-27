@@ -10,25 +10,16 @@ import {
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import { Link } from "react-router-dom";
-import { getAllMovies, addToFavorites } from '../../store/actions';
+import { getAllMovies, addToFavorites,getSearchMovies } from '../../store/actions';
 
 
  class MovieList extends Component {
 
     componentDidMount() {
-      this.props.getListOfMovies()
+        const { getListOfMovies, getFilteredList} = this.props;
+        let InputValue = window.localStorage.getItem('setInputValue')
+        InputValue > 2 ? getListOfMovies() : getFilteredList(InputValue)
     }
-   
-    // addToFavorite = (element) => {
-    //    let favorites = this.props.favorites;
-    //    let favoritesId = favorites.map(fav=>fav.id)
-    //     console.log(favoritesId)
-    //    if (!favoritesId.includes(element.id)) {
-    //     this.props.addMyList(element)
-    //    }
-    //     console.log(element)
-    // }
-
 
     render () {
         const NoImage = 'http://www.noemiaalugueis.com.br/assets/images/no-image.png';
@@ -37,7 +28,7 @@ import { getAllMovies, addToFavorites } from '../../store/actions';
             {
             this.props.movies
             .map((element) => <div key={element.id} className='column'>
-            <Card style={{width:'250px', height:'470px'}}>
+            <Card style={{ height:'470px'}}>
                 <CardImg alt={element.name} src={element.image?element.image.medium : NoImage}></CardImg>
                 <CardBody>
                     <CardTitle className="title">{element.name}</CardTitle>
@@ -82,6 +73,8 @@ const mapDispatchToProps = dispatch => {
     return {
         getListOfMovies: () => dispatch(getAllMovies()),
         addToMyList: (id) => dispatch(addToFavorites(id)),
+        getFilteredList: (search) => dispatch(getSearchMovies(search))
+    
     }
 
 }

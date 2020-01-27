@@ -10,9 +10,7 @@ import { Link } from 'react-router-dom';
 
 class MyList extends Component {
 
-
     handleAbout = (element) => {
-        console.log('click')
         this.props.aboutInformation(element);
     }
     render() {
@@ -22,7 +20,7 @@ class MyList extends Component {
         return (<div>{
         favorites
             .map(id => getShow(id))
-            .map((element)=> 
+            .map((element) => 
                 <div key={element.id} className='column'>
                     <Card style={{width:'250px', height:'470px'}}>
                         <CardImg alt={element.name} src={element.image?element.image.medium : NoImage}></CardImg>
@@ -51,9 +49,12 @@ class MyList extends Component {
 
 const mapStateToProps = store => {
     console.log(store)
+   
     return {
         favorites:store.movieList.favorites,
-        getShow: (showId) => store.movieList.fetchedList.find(show=>show.id == showId)
+        getShow: (showId) => store.movieList.fetchedList.find(show=>show.id == showId),
+    
+
     }
 };
 

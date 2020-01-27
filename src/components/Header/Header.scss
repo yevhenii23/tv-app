@@ -23,8 +23,8 @@ $textColor: #F9FAFF;
         text-decoration: none;
     }
     span {
-        margin-right: 15px;
-        color:red;
+        margin-right: 15px; 
+        color:$buttonColor
     }
 }
 
@@ -40,6 +40,7 @@ input[type=button] {
 }
 
 input[type=search] {
+    padding-left: 1vw;
     border-bottom-left-radius: 10px;
     border-top-left-radius: 10px;
     height: 35px;

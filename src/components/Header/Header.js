@@ -3,7 +3,7 @@ import { Component } from 'react';
 import './Header.scss';
 import { Link } from "react-router-dom";
 import { connect } from 'react-redux';
-import { getSearchMovies } from '../../store/actions';
+import { getSearchMovies,getAllMovies } from '../../store/actions';
 
  class Header extends Component {
 
@@ -12,13 +12,11 @@ import { getSearchMovies } from '../../store/actions';
     }
     componentDidMount () {
         let getInputValue = window.localStorage.getItem('setInputValue')
-        console.log('currentinputvalue',getInputValue)
         this.setState({value:JSON.parse(getInputValue)})
     }
     componentDidUpdate () {
         let setInputValue = this.state.value;
-        let setItem = window.localStorage.setItem('setInputValue',JSON.stringify(setInputValue));
-        console.log(setItem)
+        window.localStorage.setItem('setInputValue',JSON.stringify(setInputValue));
 
     }
 
@@ -29,7 +27,11 @@ import { getSearchMovies } from '../../store/actions';
 
     handleChange = (e) => {
         this.setState({value:e.target.value})
-        console.log(e.target.value)
+    }
+
+    handleClickHome = () => {
+       this.props.getListOfMovies()
+
     }
 
     render () {
@@ -37,8 +39,8 @@ import { getSearchMovies } from '../../store/actions';
         return <div className="header"> 
            <h1 className="text heading">TV-APP</h1>
            <div className="label">
-            <Link to="/" className="link">Home</Link>
-            <Link to="/mylist" className="link">My list:</Link>
+            <Link to="/" className="link" onClick={this.handleClickHome}>Home</Link>
+            <Link to="/mylist" className="link" onClick={this.handleMyList}>My list:</Link>
             <span>{number}</span>  
             <input type="search" placeholder="Type to Search"  value={this.state.value} onChange={this.handleChange}></input>
             <input type="button" value="Search" onClick={this.handleClick}></input>
@@ -47,11 +49,13 @@ import { getSearchMovies } from '../../store/actions';
     }
 }
 const mapDispatchToProps = dispatch => ({
-    search: (search) =>  dispatch(getSearchMovies(search))
+    search: (search) =>  dispatch(getSearchMovies(search)),
+    getListOfMovies: () => dispatch(getAllMovies()),
 });
 const mapStateToProps = store => {
     return {
-        favoriteListLength:store.movieList.favorites.length
+        favoriteListLength:store.movieList.favorites.length,
+        
     }      
     
 }

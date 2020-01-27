@@ -1,7 +1,6 @@
 import React from 'react';
 import './App.scss';
 import { BrowserRouter as Router, Route } from "react-router-dom";
-import { connect } from 'react-redux';
 import Header from './components/Header/Header';
 import MovieList from './components/MovieList/MovieList';
 import About from './components/About/About';
