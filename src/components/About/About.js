@@ -7,6 +7,7 @@ import  './About.scss';
 const About = ({ getShow }) => {
     const { showId } = useParams();
     const { name,summary,image } = getShow(showId) || {};
+
     return ( 
     <div className="about-wraper">
         <h1>About</h1>
@@ -29,9 +30,9 @@ About.propTypes = {
     
 }
 
-const mapStateToProps = store => {
+const mapStateToProps = ({ list }) => {
     return {
-        getShow: (showId) => store.movieList.fetchedList.find(show=>show.id == showId)
+        getShow: (showId) => list.find(show=>show.id == showId)
     }
 }
 

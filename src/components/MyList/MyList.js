@@ -8,13 +8,15 @@ import {
   } from 'reactstrap';
 import { Link } from 'react-router-dom';
 
+const NoImage = 'http://www.noemiaalugueis.com.br/assets/images/no-image.png';
+
 class MyList extends Component {
 
     handleAbout = (element) => {
         this.props.aboutInformation(element);
     }
     render() {
-        const NoImage = 'http://www.noemiaalugueis.com.br/assets/images/no-image.png';
+        
         const { getShow, favorites } = this.props;
 
         return (<div>{
@@ -47,12 +49,10 @@ class MyList extends Component {
     }
 }
 
-const mapStateToProps = store => {
-    console.log(store)
-   
+const mapStateToProps = ({ favorites, list }) => {
     return {
-        favorites:store.movieList.favorites,
-        getShow: (showId) => store.movieList.fetchedList.find(show=>show.id == showId),
+        favorites,
+        getShow: (showId) => list.find(show=>show.id == showId),
     
 
     }

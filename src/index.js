@@ -6,19 +6,19 @@ import * as serviceWorker from './serviceWorker';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import { createStore,applyMiddleware } from 'redux';
 import { Provider } from 'react-redux';
-import { movieListReducer } from './store/movieListReducer';
+import { movieReducer } from './store/movieReducer';
 import { combineReducers } from 'redux';
 import thunk from 'redux-thunk';
 
-export const rootReducer = combineReducers({
-    movieList: movieListReducer,
-}) 
+// export const rootReducer = combineReducers({
+//     movieList: movieListReducer,
+// }) 
 
 // https://stackoverflow.com/questions/35305661/where-to-write-to-localstorage-in-a-redux-app
 
-const persistedState = localStorage.getItem('reduxState') ? JSON.parse(localStorage.getItem('reduxState')) : {};
+const persistedState = localStorage.getItem('reduxState') ? JSON.parse(localStorage.getItem('reduxState')) : undefined;
 
-const store = createStore(rootReducer, persistedState, applyMiddleware(thunk));
+const store = createStore(movieReducer, persistedState, applyMiddleware(thunk));
 
 store.subscribe(() => {
     localStorage.setItem('reduxState', JSON.stringify(store.getState()))

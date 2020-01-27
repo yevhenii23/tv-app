@@ -3,62 +3,33 @@ import { Component } from 'react';
 import './Header.scss';
 import { Link } from "react-router-dom";
 import { connect } from 'react-redux';
-import { getSearchMovies,getAllMovies } from '../../store/actions';
+import { fetchMovies, changeSearchText } from '../../store/actions';
 
- class Header extends Component {
 
-    state = {
-        value: '',
-    }
-    componentDidMount () {
-        let getInputValue = window.localStorage.getItem('setInputValue')
-        this.setState({value:JSON.parse(getInputValue)})
-    }
-    componentDidUpdate () {
-        let setInputValue = this.state.value;
-        window.localStorage.setItem('setInputValue',JSON.stringify(setInputValue));
+const Header = ({ favoritesLength, searchText, getMovies, changeSearch }) => (
 
-    }
-
-    handleClick = () => {
-        this.props.search(this.state.value)
-
-    }
-
-    handleChange = (e) => {
-        this.setState({value:e.target.value})
-    }
-
-    handleClickHome = () => {
-       this.props.getListOfMovies()
-
-    }
-
-    render () {
-        const number = this.props.favoriteListLength;
-        return <div className="header"> 
-           <h1 className="text heading">TV-APP</h1>
-           <div className="label">
-            <Link to="/" className="link" onClick={this.handleClickHome}>Home</Link>
-            <Link to="/mylist" className="link" onClick={this.handleMyList}>My list:</Link>
-            <span>{number}</span>  
-            <input type="search" placeholder="Type to Search"  value={this.state.value} onChange={this.handleChange}></input>
-            <input type="button" value="Search" onClick={this.handleClick}></input>
-           </div>
+    <div className="header"> 
+        <h1 className="text heading">TV-APP</h1>
+        <div className="label">
+            <Link to="/" className="link">Home</Link>
+            <Link to="/mylist" className="link">My list:</Link>
+            <span>{favoritesLength}</span>  
+            <input type="search" placeholder="Type to Search"  value={searchText} onChange={changeSearch}></input>
+            <input type="button" value="Search" onClick={getMovies}></input>
         </div>
+    </div>
+);
+
+const mapStateToProps = ({ favorites, searchText }) => {
+    return {
+        favoritesLength: favorites.length,
+        searchText: searchText,
     }
 }
-const mapDispatchToProps = dispatch => ({
-    search: (search) =>  dispatch(getSearchMovies(search)),
-    getListOfMovies: () => dispatch(getAllMovies()),
-});
-const mapStateToProps = store => {
-    return {
-        favoriteListLength:store.movieList.favorites.length,
-        
-    }      
-    
-}
 
+const mapDispatchToProps = dispatch => ({
+    getMovies: () => dispatch(fetchMovies()),
+    changeSearch: (e) => dispatch(changeSearchText(e.target.value)),
+});
 
 export default connect (mapStateToProps,mapDispatchToProps)(Header);
