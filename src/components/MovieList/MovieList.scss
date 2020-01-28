@@ -13,3 +13,10 @@ $textColor: #F9FAFF;
 .title {
     color:$buttonColor
 }
+
+.spinner-wraper {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 90vh;
+}

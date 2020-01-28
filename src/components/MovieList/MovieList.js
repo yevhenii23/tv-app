@@ -5,7 +5,7 @@ import { FaArrowAltCircleRight} from 'react-icons/fa'
 import { MdFavorite } from 'react-icons/md'
 import {
     Container,Row,Col,Card, CardImg,CardBody,
-    CardTitle, CardSubtitle, Button
+    CardTitle, CardSubtitle, Button, Spinner
   } from 'reactstrap';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
@@ -25,7 +25,9 @@ const NoImage = 'http://www.noemiaalugueis.com.br/assets/images/no-image.png';
         const { loading, movies } = this.props;
 
         if (loading) {
-            return <p>Loading....</p>
+            return <div className='spinner-wraper'>
+                    <Spinner style={{ width: '20rem', height: '20rem', }}/>
+                </div>
         }
 
         return (

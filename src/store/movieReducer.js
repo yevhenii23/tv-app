@@ -1,4 +1,7 @@
-import { FETCH_MOVIE_LIST, ADD_TO_MY_LIST, FETCH_MOVIE_LIST_SUCCESS, CHANGE_SEARCH_TEXT } from './actions'
+import { 
+    FETCH_MOVIE_LIST, ADD_TO_MY_LIST,
+    FETCH_MOVIE_LIST_SUCCESS, CHANGE_SEARCH_TEXT,
+    DELETE_FROM_MY_LIST } from './actions'
 
 export const initialState = {
     list: [],
@@ -35,6 +38,12 @@ export function movieReducer (state = initialState, action) {
                     action.id
                 ])
             }
+        case DELETE_FROM_MY_LIST: 
+            return {
+                ...state,
+                favorites: state.favorites.filter(id => id !== action.id)
+            }
+            
        default: 
            return state;
     }

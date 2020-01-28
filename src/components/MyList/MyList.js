@@ -7,17 +7,15 @@ import {
     CardTitle, CardSubtitle, Button
   } from 'reactstrap';
 import { Link } from 'react-router-dom';
+import './MyList';
+import { deleteFromFavorites } from '../../store/actions';
 
 const NoImage = 'http://www.noemiaalugueis.com.br/assets/images/no-image.png';
 
 class MyList extends Component {
 
-    handleAbout = (element) => {
-        this.props.aboutInformation(element);
-    }
-    render() {
-        
-        const { getShow, favorites } = this.props;
+    render() {        
+        const { getShow, favorites, deleteId } = this.props;
 
         return (<div>{
         favorites
@@ -33,10 +31,15 @@ class MyList extends Component {
                                 <Row>
                                     <Col>
                                         <Link to={`/about/${element.id}`}>
-                                            <Button style={{width:'100%'}}>
-                                                More... <FaArrowAltCircleRight/>
+                                            <Button size="sm" block> 
+                                                More <FaArrowAltCircleRight/>
                                             </Button>
                                         </Link>
+                                    </Col>
+                                    <Col>
+                                        <Button size="sm" color="danger" block  onClick={() => deleteId(element.id)}> 
+                                            delete
+                                        </Button>
                                     </Col>
                                 </Row>
                             </Container>
@@ -53,9 +56,17 @@ const mapStateToProps = ({ favorites, list }) => {
     return {
         favorites,
         getShow: (showId) => list.find(show=>show.id == showId),
-    
+        
 
     }
 };
 
-export default connect(mapStateToProps)(MyList);
+const mapDispatchToProps = dispatch => {
+
+    return {
+        deleteId: (id) => dispatch(deleteFromFavorites(id))
+    }
+}
+
+
+export default connect(mapStateToProps,mapDispatchToProps)(MyList);

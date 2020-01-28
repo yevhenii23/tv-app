@@ -3,6 +3,7 @@ import axios from 'axios';
 export const FETCH_MOVIE_LIST = 'FETCH_MOVIE_LIST';
 export const FETCH_MOVIE_LIST_SUCCESS = 'FETCH_MOVIE_LIST_SUCCESS';
 export const ADD_TO_MY_LIST = 'ADD_TO_MY_LIST';
+export const DELETE_FROM_MY_LIST = 'DELETE_FROM_MY_LIST';
 export const CHANGE_SEARCH_TEXT ='CHANGE_SEARCH_TEXT';
 
 const getUrl = (searchText) => searchText ? 'http://api.tvmaze.com/search/shows?q=' + searchText : 'http://api.tvmaze.com/shows';
@@ -33,4 +34,11 @@ export const changeSearchText = (text) => {
         type: CHANGE_SEARCH_TEXT,
         text
     }
+}
+
+export const deleteFromFavorites = (id) => {
+    return {
+        type: DELETE_FROM_MY_LIST,
+        id
+    }    
 }
