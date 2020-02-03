@@ -37,7 +37,9 @@ class MyList extends Component {
                                         </Link>
                                     </Col>
                                     <Col>
-                                        <Button size="sm" color="danger" block  onClick={() => deleteId(element.id)}> 
+                                        <Button size="sm" color="danger" block  onClick={() => {
+                                            return deleteId(element.id);
+                                        }}> 
                                             delete
                                         </Button>
                                     </Col>
