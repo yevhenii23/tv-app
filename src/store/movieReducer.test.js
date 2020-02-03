@@ -32,7 +32,7 @@ describe('Movie reducer', () => {
     })
 
     describe('#CHANGE_SEARCH_TEXT', () => {
-        test('set input value', () => {
+        test('sets input value', () => {
             const initialState = {
                 searchText:'',
             }
@@ -42,36 +42,36 @@ describe('Movie reducer', () => {
             const result = movieReducer(initialState,action)
 
             expect(result).toEqual({
-                searchText: 'some text',
+                searchText: action.text,
             })
         })
     })
 
     describe('#ADD_TO_MY_LIST', () => {
-        test('add new item to array',() => {
+        test('adds new favorite movie to array',() => {
             const initialState = {
                 favorites:[],
             }
 
-            const action = { type: ADD_TO_MY_LIST, id:3 };
+            const action = { type: ADD_TO_MY_LIST, id: 3 };
 
-            const result = movieReducer(initialState,action)
+            const result = movieReducer(initialState, action)
 
             expect(result).toEqual({
-                favorites:[3]
+                favorites: [action.id]
             })
         })
     })
 
     describe('#DELETE_FROM_MY_LIST', () => {
-        test('delete item from list', () => {
+        test('deletes favorite movie from list', () => {
             const initialState = {
                 favorites: [2],
             }
 
             const action = { type: DELETE_FROM_MY_LIST, id:2 }
 
-            const result = movieReducer(initialState,action)
+            const result = movieReducer(initialState, action);
 
             expect(result).toEqual({
                 favorites:[]

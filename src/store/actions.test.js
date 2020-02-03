@@ -1,43 +1,63 @@
+import axios from 'axios';
+import { ADD_TO_MY_LIST, DELETE_FROM_MY_LIST, CHANGE_SEARCH_TEXT, FETCH_MOVIE_LIST, FETCH_MOVIE_LIST_SUCCESS, addToFavorites, changeSearchText, deleteFromFavorites,fetchMovies } from './actions'
 
-import expect from 'expect'
-import { ADD_TO_MY_LIST, DELETE_FROM_MY_LIST, CHANGE_SEARCH_TEXT } from './actions'
-import { addToFavorites, changeSearchText, deleteFromFavorites } from './actions';
+jest.mock('axios');
 
-describe('action',() => {
-    test('should create a action add to favorites', () => {
-        const id = 3;
+describe('Actions',() => {
+  describe('#fetchMovies', () => {
+    const list = [1,2,3];
+    const dispatch = jest.fn();
+    
+    axios.get.mockResolvedValue({ data:  list})
 
-        const expectedAction = {
-            type: ADD_TO_MY_LIST,
-            id
-        }
+    test('fetch movie list', async () => {
+      const getState = jest.fn(() => ({
+        searchText: null,
+      }));
 
-        expect(addToFavorites(id)).toEqual(expectedAction)
+      await fetchMovies()(dispatch, getState);
 
-    })
+      expect(getState).toHaveBeenCalled();
+      expect(dispatch).toHaveBeenCalledWith({ type: FETCH_MOVIE_LIST });
+      expect(axios.get).toHaveBeenCalledWith('http://api.tvmaze.com/shows');
+      expect(dispatch).toHaveBeenCalledWith({ type: FETCH_MOVIE_LIST_SUCCESS, list });
+    });    
+  });
 
-    test('should change search text', () => {
-        const text = 'aaa';
+    // test('should create a action add to favorites', () => {
+    //     const id = 3;
 
-        const expectedAction = {
-            type: CHANGE_SEARCH_TEXT,
-            text
-        }
+    //     const expectedAction = {
+    //         type: ADD_TO_MY_LIST,
+    //         id
+    //     }
 
-        expect(changeSearchText(text)).toEqual(expectedAction)
+    //     expect(addToFavorites(id)).toEqual(expectedAction)
 
-    })
+    // })
 
-    test('should delete from array', () => {
-        const id = 5;
+    // test('should change search text', () => {
+    //     const text = 'aaa';
 
-        const expectedAction = {
-            type: DELETE_FROM_MY_LIST,
-            id
-        }
+    //     const expectedAction = {
+    //         type: CHANGE_SEARCH_TEXT,
+    //         text
+    //     }
 
-        expect(deleteFromFavorites(id)).toEqual(expectedAction)
-    })
+    //     expect(changeSearchText(text)).toEqual(expectedAction)
+
+    // })
+
+    // test('should delete from array', () => {
+    //     const id = 5;
+
+    //     const expectedAction = {
+    //         type: DELETE_FROM_MY_LIST,
+    //         id
+    //     }
+
+    //     expect(deleteFromFavorites(id)).toEqual(expectedAction)
+    // })
 })
 
 

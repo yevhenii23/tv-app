@@ -8,12 +8,12 @@ export const CHANGE_SEARCH_TEXT ='CHANGE_SEARCH_TEXT';
 
 const getUrl = (searchText) => searchText ? 'http://api.tvmaze.com/search/shows?q=' + searchText : 'http://api.tvmaze.com/shows';
 
-export const fetchMovies = () => (dispatch, getState) => {
+export const fetchMovies = () => async (dispatch, getState) => {
     const { searchText } = getState();
     const url = getUrl(searchText);
 
     dispatch({ type:FETCH_MOVIE_LIST });
-    axios.get(url)
+    await axios.get(url)
         .then(({ data: list }) => {
             dispatch({
                 type:FETCH_MOVIE_LIST_SUCCESS,
