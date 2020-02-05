@@ -24,40 +24,40 @@ describe('Actions',() => {
     });    
   });
 
-    // test('should create a action add to favorites', () => {
-    //     const id = 3;
+    test('should create a action add to favorites', () => {
+        const id = 3;
 
-    //     const expectedAction = {
-    //         type: ADD_TO_MY_LIST,
-    //         id
-    //     }
+        const expectedAction = {
+            type: ADD_TO_MY_LIST,
+            id
+        }
 
-    //     expect(addToFavorites(id)).toEqual(expectedAction)
+        expect(addToFavorites(id)).toEqual(expectedAction)
 
-    // })
+    })
 
-    // test('should change search text', () => {
-    //     const text = 'aaa';
+    test('should change search text', () => {
+        const text = 'aaa';
 
-    //     const expectedAction = {
-    //         type: CHANGE_SEARCH_TEXT,
-    //         text
-    //     }
+        const expectedAction = {
+            type: CHANGE_SEARCH_TEXT,
+            text
+        }
 
-    //     expect(changeSearchText(text)).toEqual(expectedAction)
+        expect(changeSearchText(text)).toEqual(expectedAction)
 
-    // })
+    })
 
-    // test('should delete from array', () => {
-    //     const id = 5;
+    test('should delete from array', () => {
+        const id = 5;
 
-    //     const expectedAction = {
-    //         type: DELETE_FROM_MY_LIST,
-    //         id
-    //     }
+        const expectedAction = {
+            type: DELETE_FROM_MY_LIST,
+            id
+        }
 
-    //     expect(deleteFromFavorites(id)).toEqual(expectedAction)
-    // })
+        expect(deleteFromFavorites(id)).toEqual(expectedAction)
+    })
 })
 
 
