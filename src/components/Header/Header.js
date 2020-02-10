@@ -19,7 +19,7 @@ const Header = ({ favoritesLength, searchText, getMovies, changeSearch }) => (
 );
 
 
-const mapStateToProps = ({ favorites = 0, searchText }) => {
+const mapStateToProps = ({ favorites, searchText }) => {
     return {
         favoritesLength: favorites.length,
         searchText: searchText,
@@ -31,4 +31,4 @@ const mapDispatchToProps = dispatch => ({
     changeSearch: (e) => dispatch(changeSearchText(e.target.value)),
 });
 
-export default connect (mapStateToProps,mapDispatchToProps)(Header);
+export default connect(mapStateToProps, mapDispatchToProps)(Header);
