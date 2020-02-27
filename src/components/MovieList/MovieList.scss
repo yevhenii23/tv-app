@@ -5,9 +5,11 @@ $textColor: #F9FAFF;
 .column {
     display: flex;
     justify-content: center;
-    float: left;
-    width: 20%;
-    margin-top:4vh;
+
+}
+.image {
+    width: auto !important;
+    height: 300px;
 }
 
 .title {

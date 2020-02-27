@@ -16,6 +16,11 @@ class MyList extends Component {
 
     render() {        
         const { getShow, favorites, deleteId } = this.props;
+        if (favorites.length === 0) {
+            return (
+              <h5>No movies found</h5>
+            );
+        }
 
         return (<div>{
         favorites
