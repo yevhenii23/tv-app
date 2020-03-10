@@ -1,22 +1,14 @@
 import React from 'react';
 import { Component } from 'react';
 import './MovieList.scss';
-import { FaArrowAltCircleRight} from 'react-icons/fa'
-import { MdFavorite } from 'react-icons/md'
-import {
-    Container,Row,Col,Card, CardImg,CardBody,
-    CardTitle, Button, Spinner
-  } from 'reactstrap';
+import { Spinner } from 'reactstrap';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
-import { Link } from "react-router-dom";
 import { fetchMovies, addToFavorites, changeSearchText } from '../../store/actions';
 import { List, AutoSizer} from 'react-virtualized';
 import 'react-virtualized/styles.css';
+import CardWraper from '../Card/CardWraper ';
 
-
-
-const NoImage = 'http://www.noemiaalugueis.com.br/assets/images/no-image.png';
 
  class MovieList extends Component {
 
@@ -28,30 +20,12 @@ const NoImage = 'http://www.noemiaalugueis.com.br/assets/images/no-image.png';
     _rowRender = ({ index, key, style }) => {
         const { movies, addToMyList } = this.props;
             return (
-                <div  className='column' key={key} style={style}>
-                    <Card>
-                        <CardImg  className="image" alt={movies[index].name} src={movies[index].image.original}/>
-                        <CardBody>
-                            <CardTitle className="title">{movies[index].name}</CardTitle>
-                            <Container>
-                                <Row>
-                                    <Col>
-                                        <Link to={`/about/${movies[index].id}`}>
-                                            <Button style={{width:'100px'}}>
-                                                More... <FaArrowAltCircleRight/>
-                                            </Button>
-                                        </Link>
-                                    </Col>
-                                    <Col>
-                                        <Button onClick={() => addToMyList(movies[index].id)}>
-                                            <MdFavorite/>
-                                        </Button>
-                                    </Col>
-                                </Row>
-                            </Container>
-                        </CardBody>
-                    </Card>
+                <div style={style} key={key} className='test'>
+                    <CardWraper movies={movies} index={index*3} addToMyList={addToMyList} />
+                    <CardWraper movies={movies} index={index*3+1} addToMyList={addToMyList} />
+                    <CardWraper movies={movies} index={index*3+2} addToMyList={addToMyList} />
                 </div>
+
             )
 
         ;
@@ -73,12 +47,12 @@ const NoImage = 'http://www.noemiaalugueis.com.br/assets/images/no-image.png';
                     <List
                         rowHeight={450}
                         overscanRowCount={20}
-                        rowCount={movies.length}
+                        rowCount={movies.length/3}
                         rowRenderer={this._rowRender}
                         width={width}
                         height={height}
-
                     />
+
         )}
     </AutoSizer>
 
@@ -96,15 +70,15 @@ const mapStateToProps = ({ list, favorites, loading }) => {
         movies: list,
         favorites,
     }
-}
+};
 
 const mapDispatchToProps = dispatch => {
     return {
         getMovies: () => dispatch(fetchMovies()),
         addToMyList: (id) => dispatch(addToFavorites(id)),
-        chnageSearch: (text) => dispatch(changeSearchText(text)),
+        changeSearch: (text) => dispatch(changeSearchText(text)),
     }
 
-}
+};
 
 export default connect(mapStateToProps,mapDispatchToProps)(MovieList);

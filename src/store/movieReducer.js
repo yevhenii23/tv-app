@@ -18,18 +18,18 @@ export function movieReducer (state = initialState, action) {
             return {
                 ...state,
                 loading: true,                
-            }
+            };
         case FETCH_MOVIE_LIST_SUCCESS:
             return {
                 ...state,
                 loading: false,
                 list: action.list,
-            }
+            };
         case CHANGE_SEARCH_TEXT:
             return {
                 ...state,                
                 searchText: action.text,
-            }
+            };
         case ADD_TO_MY_LIST:
             return {
                 ...state,
@@ -37,12 +37,12 @@ export function movieReducer (state = initialState, action) {
                     ...state.favorites,
                     action.id
                 ])
-            }
+            };
         case DELETE_FROM_MY_LIST: 
             return {
                 ...state,
                 favorites: state.favorites.filter(id => id !== action.id)
-            }
+            };
             
        default: 
            return state;

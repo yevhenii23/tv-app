@@ -2,23 +2,26 @@ $mainColor: #3F3F3F;
 $buttonColor: #48958B;
 $textColor: #F9FAFF;
 
-.column {
-    display: flex;
-    justify-content: center;
-
-}
-.image {
-    width: auto !important;
-    height: 300px;
-}
-
-.title {
-    color:$buttonColor
-}
 
 .spinner-wraper {
     display: flex;
     justify-content: center;
     align-items: center;
     height: 90vh;
+}
+
+.wraper {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    grid-template-rows: 1fr;
+    grid-column-gap: 0px;
+    grid-row-gap: 0px
+}
+
+.test {
+    display: grid;
+    grid-template-columns: repeat(3, 2fr);
+    grid-template-rows: 1fr;
+    grid-column-gap: 0px;
+    grid-row-gap: 0px;
 }

@@ -20,25 +20,25 @@ export const fetchMovies = () => async (dispatch, getState) => {
                 list: searchText ? list.map(res => res.show) : list,
             })
         })
-}
+};
 
 export const addToFavorites = (id) => {
     return {
         type: ADD_TO_MY_LIST,
         id
     }
-}
+};
 
 export const changeSearchText = (text) => {
     return {
         type: CHANGE_SEARCH_TEXT,
         text
     }
-}
+};
 
 export const deleteFromFavorites = (id) => {
     return {
         type: DELETE_FROM_MY_LIST,
         id
     }    
-}
+};

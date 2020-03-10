@@ -23,8 +23,9 @@ const mapStateToProps = ({ favorites, searchText }) => {
     return {
         favoritesLength: favorites.length,
         searchText: searchText,
+
     }
-}
+};
 
 const mapDispatchToProps = dispatch => ({
     getMovies: () => dispatch(fetchMovies()),

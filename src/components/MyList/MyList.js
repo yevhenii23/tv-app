@@ -9,6 +9,7 @@ import {
 import { Link } from 'react-router-dom';
 import './MyList';
 import { deleteFromFavorites } from '../../store/actions';
+import  './MyList.scss';
 
 const NoImage = 'http://www.noemiaalugueis.com.br/assets/images/no-image.png';
 
@@ -22,11 +23,11 @@ class MyList extends Component {
             );
         }
 
-        return (<div>{
+        return (<div className='my-list'>{
         favorites
             .map(id => getShow(id))
             .map((element) => 
-                <div key={element.id} className='column'>
+                <div key={element.id}>
                     <Card style={{width:'250px', height:'470px'}}>
                         <CardImg alt={element.name} src={element.image?element.image.medium : NoImage}></CardImg>
                         <CardBody>
@@ -73,7 +74,7 @@ const mapDispatchToProps = dispatch => {
     return {
         deleteId: (id) => dispatch(deleteFromFavorites(id))
     }
-}
+};
 
 
 export default connect(mapStateToProps,mapDispatchToProps)(MyList);
